@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,10 +24,35 @@ public class MouseScrollerController : MonoBehaviour
     private float progress = 0f;
     private bool hasWon = false;
 
+    public AudioSource backgroundMusic;
+    public AudioSource yippieSFX;
+    public ParticleSystem confettiEffect1;
+    public ParticleSystem confettiEffect2;
+
     
     void Start()
     {
         lastMousePos = Input.mousePosition;
+
+        if (backgroundMusic != null )
+        {
+            backgroundMusic.loop = true;
+            backgroundMusic.Play();
+        }
+
+        if (confettiEffect1 != null)
+        {
+            confettiEffect1.Stop();
+        }
+        if (confettiEffect2 != null)
+        {
+            confettiEffect2.Stop();
+        }
+
+        if (yippieSFX != null)
+        {
+            yippieSFX.Stop();
+        }
     }
 
     // Update is called once per frame
@@ -79,5 +105,24 @@ public class MouseScrollerController : MonoBehaviour
             bgRotator.speed = 0f;
             bgRotator2.speed = 0f;
         }
+
+        //Stops the background music
+        if(backgroundMusic != null)
+        {
+            backgroundMusic.Stop();
+        }
+
+        if (yippieSFX != null)
+        {
+            yippieSFX.Play();
+        }
+
+        if (confettiEffect1 && confettiEffect2 != null)
+        {
+            confettiEffect1.Play();
+            confettiEffect2.Play();
+        }
+
+       
     }
 }
