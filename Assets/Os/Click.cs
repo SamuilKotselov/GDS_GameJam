@@ -10,17 +10,26 @@ using UnityEngine.UI;
 public class Click : MonoBehaviour
 {
    public int Score = 0;
-    public int ScoreIncrease = 1;
+   private int ScoreIncrease = 1;
+    
    [SerializeField] private TextMeshProUGUI Mark;
+    [SerializeField] private Button button;
+    [SerializeField] private Sprite NewSprite;
     public void IncreaseScore () { 
         Score += ScoreIncrease;
         Mark.text = Score.ToString();
         Debug.Log("Puntaje aumentado: " + Score);
         if (Score >= 12)
         {
-            Debug.Log("End game ");
-            
+            Debug.Log("End game");
+            ChangeSprite();
         }
     }
-
+    public void ChangeSprite()
+    {
+        if (button )
+        {
+            button.image.sprite = NewSprite;
+        }
+    }
 }
