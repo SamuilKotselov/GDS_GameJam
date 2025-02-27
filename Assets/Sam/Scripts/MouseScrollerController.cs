@@ -12,6 +12,7 @@ public class MouseScrollerController : MonoBehaviour
     public float fillSpeed = 0.1f;
     public float decayRate = 0.02f;
     public float winThreshhold = 1f;
+    public Text tutText;
 
     [Header("Background Speed Control")]
     public BGRotator bgRotator;
@@ -33,6 +34,7 @@ public class MouseScrollerController : MonoBehaviour
     void Start()
     {
         lastMousePos = Input.mousePosition;
+        tutText.gameObject.SetActive(true);
 
         if (backgroundMusic != null )
         {
@@ -96,6 +98,7 @@ public class MouseScrollerController : MonoBehaviour
     {
         Debug.Log("woo you spin my head right round right round baby go down");
         hasWon = true;
+        tutText.gameObject.SetActive(false); 
         progress = 1f;
         progressBar.fillAmount = 1f; //Lock the progress bar when victory happens 
 
