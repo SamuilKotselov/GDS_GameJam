@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Timer : MonoBehaviour
 {
    float timeE = 0f; //Final Time
-   float timeS = 3f; //Start Time
+   float timeS = 8f; //Start Time
     [SerializeField] TextMeshProUGUI countdown;
     private void Start()
     {
@@ -29,6 +29,4 @@ public class Timer : MonoBehaviour
 
         }
     }
-
-
 }
