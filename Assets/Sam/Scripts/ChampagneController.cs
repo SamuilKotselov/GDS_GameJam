@@ -15,6 +15,7 @@ public class ChampagneController : MonoBehaviour
 
     public AudioClip winSound;
     public AudioClip loseSound;
+    public AudioSource background_Music;
 
     private AudioSource audioSource;
     private RectTransform champagneTransform;
@@ -24,6 +25,9 @@ public class ChampagneController : MonoBehaviour
     {
         champagneTransform = GetComponent<RectTransform>();
         audioSource = GetComponent<AudioSource>();
+
+        background_Music.loop = true;
+        background_Music.Play();
     }
 
 
@@ -35,6 +39,7 @@ public class ChampagneController : MonoBehaviour
     public void ToastLose()
     {
         StartCoroutine(MoveChampagne(zoneLose.position, chLoseSpeed, true, loseSound));
+        background_Music.Stop();
     }
 
     private IEnumerator MoveChampagne(Vector3 target, float speed, bool shouldRotate, AudioClip clip)

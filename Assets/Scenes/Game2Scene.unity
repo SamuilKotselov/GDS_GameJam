@@ -156,7 +156,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -15, y: 136.8}
+  m_AnchoredPosition: {x: 20, y: 136.8}
   m_SizeDelta: {x: 448.6351, y: 45.0473}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &324277239
@@ -892,6 +892,7 @@ MonoBehaviour:
   loseRotationSpeed: 1000
   winSound: {fileID: 8300000, guid: 8aa3b07c7e7a7724ab1d323ab54dfa6b, type: 3}
   loseSound: {fileID: 8300000, guid: a67e4f977cad1a24fa7a23c94a06634c, type: 3}
+  background_Music: {fileID: 1445601603}
 --- !u!82 &1445601603
 AudioSource:
   m_ObjectHideFlags: 0
@@ -902,9 +903,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 75bfde76e4e995240b20273aa852ce4d, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
