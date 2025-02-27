@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -5,12 +6,28 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Timer : MonoBehaviour
 {
-     float timeE = 0f; //Final Time
-     float timeS = 8f; //Start Time
+    public static Timer instance;
+
+    [SerializeField] float timeE = 0f; //Final Time
+    float timeS = 8f; //Start Time
     [SerializeField] TextMeshProUGUI countdown;
 
-    public delegate void TimerEndAction();
-    public event TimerEndAction OnTimerEnd;
+    public event Action OnTimerEnd;
+
+    private bool isTimerRunning = true;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void Start()
     {
@@ -18,27 +35,33 @@ public class Timer : MonoBehaviour
     }
     private void Update()
     {
-        Countdown();
+        if (isTimerRunning)
+        {
+            Countdown();
+        }
     }
     private void Countdown()
     {
-        if (timeE > 0)
+        timeE -= Time.deltaTime;
+        countdown.text = timeE.ToString("0");
+
+        if (timeE <= 0)
         {
-            timeE -= Time.deltaTime; 
-            countdown.text = Mathf.Ceil(timeE).ToString();
-        }
-        else
-        {
-            timeE = 0f;
-            countdown.text = "0";
-            if (OnTimerEnd != null) OnTimerEnd();
+            timeE = 0;
             Debug.Log("End Game");
+
+            OnTimerEnd?.Invoke();
         }
     }
 
     public void ResetTimer()
     {
-        timeE = timeS;
-        countdown.text = Mathf.Ceil(timeE).ToString();
+        timeE = timeS; 
+    }
+
+    public void StopTimer()
+    {
+        isTimerRunning = false;
     }
 }
+

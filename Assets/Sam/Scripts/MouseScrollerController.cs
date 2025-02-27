@@ -22,8 +22,7 @@ public class MouseScrollerController : MonoBehaviour
     public float maxBGSpeed = 15f;
     public float speedIncreaseRate = 0.5f;
 
-    [Header("Game Timer Ref")]
-    public Timer gameTimer;
+    private Timer timer;
 
     private Vector3 lastMousePos;
     private float progress = 0f;
@@ -41,10 +40,10 @@ public class MouseScrollerController : MonoBehaviour
         lastMousePos = Input.mousePosition;
         tutText.gameObject.SetActive(true);
 
-        if (gameTimer != null)
+        timer = Timer.instance;
+        if (timer != null)
         {
-            gameTimer.OnTimerEnd += LoseGame;
-            gameTimer.ResetTimer();
+            timer.OnTimerEnd += LoseGame;
         }
 
         if (backgroundMusic != null )
@@ -129,6 +128,7 @@ public class MouseScrollerController : MonoBehaviour
         }
 
         // Starts the coroutine for the delayed scene transition
+        timer.StopTimer();
         StartCoroutine(DelayedSceneTransition());
     }
     private void LoseGame()
@@ -168,9 +168,9 @@ public class MouseScrollerController : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (gameTimer != null)
+        if (timer != null)
         {
-            gameTimer.OnTimerEnd -= LoseGame;
+            timer.OnTimerEnd -= LoseGame;
         }
     }
 }
