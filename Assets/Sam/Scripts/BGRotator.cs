@@ -8,12 +8,6 @@ public class BGRotator : MonoBehaviour
     public float width = 14f;
     public Transform dupeSprite;
 
-    
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {

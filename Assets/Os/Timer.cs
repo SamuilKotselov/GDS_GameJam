@@ -5,9 +5,13 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Timer : MonoBehaviour
 {
-   float timeE = 0f; //Final Time
-   float timeS = 8f; //Start Time
+     float timeE = 0f; //Final Time
+     float timeS = 8f; //Start Time
     [SerializeField] TextMeshProUGUI countdown;
+
+    public delegate void TimerEndAction();
+    public event TimerEndAction OnTimerEnd;
+
     private void Start()
     {
         timeE = timeS;
@@ -18,15 +22,23 @@ public class Timer : MonoBehaviour
     }
     private void Countdown()
     {
-
-        timeE -=  Time.deltaTime;//time is being rest subtract by real time.
-        countdown.text = timeE.ToString("0");
-        //the moment the time reach 0
-        if (timeE <= 0)
+        if (timeE > 0)
         {
-            timeE = 0;
-            Debug.Log("End game ");
-
+            timeE -= Time.deltaTime; 
+            countdown.text = Mathf.Ceil(timeE).ToString();
         }
+        else
+        {
+            timeE = 0f;
+            countdown.text = "0";
+            if (OnTimerEnd != null) OnTimerEnd();
+            Debug.Log("End Game");
+        }
+    }
+
+    public void ResetTimer()
+    {
+        timeE = timeS;
+        countdown.text = Mathf.Ceil(timeE).ToString();
     }
 }

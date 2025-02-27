@@ -10199,6 +10199,7 @@ MonoBehaviour:
   minBGSpeed: 5
   maxBGSpeed: 20
   speedIncreaseRate: 0.5
+  gameTimer: {fileID: 1952383612}
   backgroundMusic: {fileID: 1459855723}
   yippieSFX: {fileID: 1459855724}
   confettiEffect1: {fileID: 1075893028}
