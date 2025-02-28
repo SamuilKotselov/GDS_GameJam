@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MouseScrollerController : MonoBehaviour
 {
@@ -21,9 +22,12 @@ public class MouseScrollerController : MonoBehaviour
     public float maxBGSpeed = 15f;
     public float speedIncreaseRate = 0.5f;
 
+    private Timer timer;
+
     private Vector3 lastMousePos;
     private float progress = 0f;
     private bool hasWon = false;
+    private bool hasLost = false;
 
     public AudioSource backgroundMusic;
     public AudioSource yippieSFX;
@@ -36,31 +40,28 @@ public class MouseScrollerController : MonoBehaviour
         lastMousePos = Input.mousePosition;
         tutText.gameObject.SetActive(true);
 
+        timer = Timer.instance;
+        if (timer != null)
+        {
+            timer.OnTimerEnd += LoseGame;
+        }
+
         if (backgroundMusic != null )
         {
             backgroundMusic.loop = true;
             backgroundMusic.Play();
         }
 
-        if (confettiEffect1 != null)
-        {
-            confettiEffect1.Stop();
-        }
-        if (confettiEffect2 != null)
-        {
-            confettiEffect2.Stop();
-        }
+        if (confettiEffect1 != null) confettiEffect1.Stop();
+        if (confettiEffect2 != null) confettiEffect2.Stop();
 
-        if (yippieSFX != null)
-        {
-            yippieSFX.Stop();
-        }
+        if (yippieSFX != null) yippieSFX.Stop();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (hasWon) return; //Stop updating the bar when victory 
+        if (hasWon || hasLost) return; //Stop updating the bar when victory 
 
         //Detects mouse input
         Vector3 currentMousePos = Input.mousePosition;
@@ -126,6 +127,50 @@ public class MouseScrollerController : MonoBehaviour
             confettiEffect2.Play();
         }
 
-       
+        // Starts the coroutine for the delayed scene transition
+        timer.StopTimer();
+        StartCoroutine(DelayedSceneTransition());
+    }
+    private void LoseGame()
+    {
+        hasLost = true;
+
+        // Stop all movement and background music duh
+        if (bgRotator != null) bgRotator.speed = 0f;
+        if (bgRotator2 != null) bgRotator2.speed = 0f;
+
+        if (backgroundMusic != null) backgroundMusic.Stop();
+
+        StartCoroutine(DelayedSceneTransition());
+    }
+
+    IEnumerator DelayedSceneTransition()
+    {
+        yield return new WaitForSeconds(1f);
+
+        LoadRandomScene();
+    }
+
+    void LoadRandomScene()
+    {
+        //Gets the level's scene index
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        int randomSceneIndex;
+
+        do
+        {
+            randomSceneIndex = Random.Range(1, SceneManager.sceneCountInBuildSettings);
+        }
+        while (randomSceneIndex == currentSceneIndex || randomSceneIndex == 0);
+
+        SceneManager.LoadScene(randomSceneIndex);
+    }
+
+    private void OnDestroy()
+    {
+        if (timer != null)
+        {
+            timer.OnTimerEnd -= LoseGame;
+        }
     }
 }

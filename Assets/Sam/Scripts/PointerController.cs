@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class PointerController : MonoBehaviour
 {
@@ -17,6 +19,8 @@ public class PointerController : MonoBehaviour
     private bool isGameOver;
     public Text toastTextPrompt;
 
+    private Timer timer;
+
 
     void Start()
     {
@@ -28,14 +32,27 @@ public class PointerController : MonoBehaviour
             champagneScript = FindObjectOfType<ChampagneController>();
         }
 
+
         if (toastTextPrompt != null)
         {
             toastTextPrompt.gameObject.SetActive(true);
+        }
+
+        timer = Timer.instance;
+        if (timer != null)
+        {
+            timer.ResetTimer();
+            timer.OnTimerEnd += OnTimeEnd;
         }
     }
 
     void Update()
     {
+        if (isGameOver)
+        {
+            return;
+        }
+
         if (!isGameOver)
         {
             // Move the pointer towards the target position
@@ -75,11 +92,46 @@ public class PointerController : MonoBehaviour
         {
             Debug.Log("Win");
             champagneScript.ToastWin();
+            StartCoroutine(DelaySceneTransition());
         }
         else
         {
             Debug.Log("Fail!");
             champagneScript.ToastLose();
+            StartCoroutine(DelaySceneTransition());
         }
+
+        if (timer != null)
+        {
+            timer.StopTimer();
+        }
+    }
+
+    void OnTimeEnd()
+    {
+        isGameOver = true;
+        champagneScript.ToastLose();
+        StartCoroutine(DelaySceneTransition());
+    }
+
+    void LoadRandomScene()
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        int randomSceneIndex;
+
+        do
+        {
+            randomSceneIndex = Random.Range(1, SceneManager.sceneCountInBuildSettings);
+        }
+        while (randomSceneIndex == currentSceneIndex || randomSceneIndex == 0 || randomSceneIndex == 2);
+
+        SceneManager.LoadScene(randomSceneIndex);
+    }
+
+    IEnumerator DelaySceneTransition()
+    {
+        yield return new WaitForSeconds(1.5f);
+
+        LoadRandomScene();
     }
 }
