@@ -97,6 +97,7 @@ public class PointerController : MonoBehaviour
         else
         {
             Debug.Log("Fail!");
+            HealthManager.instance.LoseHealth();
             champagneScript.ToastLose();
             StartCoroutine(DelaySceneTransition());
         }
@@ -111,6 +112,7 @@ public class PointerController : MonoBehaviour
     {
         isGameOver = true;
         champagneScript.ToastLose();
+        HealthManager.instance.LoseHealth();
         StartCoroutine(DelaySceneTransition());
     }
 

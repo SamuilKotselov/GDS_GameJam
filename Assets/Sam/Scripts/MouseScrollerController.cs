@@ -133,13 +133,17 @@ public class MouseScrollerController : MonoBehaviour
     }
     private void LoseGame()
     {
+        if (hasLost) return;
         hasLost = true;
+
+        HealthManager.instance.LoseHealth();
 
         // Stop all movement and background music duh
         if (bgRotator != null) bgRotator.speed = 0f;
         if (bgRotator2 != null) bgRotator2.speed = 0f;
 
         if (backgroundMusic != null) backgroundMusic.Stop();
+
 
         StartCoroutine(DelayedSceneTransition());
     }
@@ -161,7 +165,7 @@ public class MouseScrollerController : MonoBehaviour
         {
             randomSceneIndex = Random.Range(1, SceneManager.sceneCountInBuildSettings);
         }
-        while (randomSceneIndex == currentSceneIndex || randomSceneIndex == 0);
+        while (randomSceneIndex == currentSceneIndex || randomSceneIndex == 0 || randomSceneIndex == 1);
 
         SceneManager.LoadScene(randomSceneIndex);
     }

@@ -15,6 +15,7 @@ public class Timer : MonoBehaviour
     public event Action OnTimerEnd;
 
     private bool isTimerRunning = true;
+    private bool hasTriggeredTimerEnd = false;
 
     private void Awake()
     {
@@ -42,12 +43,17 @@ public class Timer : MonoBehaviour
     }
     private void Countdown()
     {
-        timeE -= Time.deltaTime;
-        countdown.text = timeE.ToString("0");
+        if (timeE > 0)
+        {
+            timeE -= Time.deltaTime;
+            countdown.text = timeE.ToString("0");
+        }
+      
 
-        if (timeE <= 0)
+        if (timeE <= 0 && !hasTriggeredTimerEnd)
         {
             timeE = 0;
+            hasTriggeredTimerEnd = true;
             Debug.Log("End Game");
 
             OnTimerEnd?.Invoke();

@@ -13,7 +13,8 @@ public class Click : MonoBehaviour
    public int Score = 0;
    public int ScoreMax = 20;
    private int ScoreIncrease = 1;
-   bool GameWin = false;
+    private bool gameWin;
+    private bool gameLoss;
 
     [SerializeField] private TextMeshProUGUI Mark;
     [SerializeField] private Button button;
@@ -25,7 +26,7 @@ public class Click : MonoBehaviour
     public AudioClip Lose;
     public AudioClip ChampOpen;
 
-
+    private Timer timer;
 
     private void Start()
     {
@@ -39,6 +40,11 @@ public class Click : MonoBehaviour
             audiosource = gameObject.AddComponent<AudioSource>();
         }
 
+        timer = Timer.instance;
+        if (timer != null)
+        {
+            timer.OnTimerEnd += GameLose;
+        }
     }
 
 
@@ -53,11 +59,7 @@ public class Click : MonoBehaviour
              
                 Debug.Log("End game");
                 ChangeSprite();
-                GameEnd();
-                if (BackgroundMusic != null)
-                {
-                    BackgroundMusic.Stop();
-                }
+                GameWin();
             }
         }
        
@@ -81,14 +83,54 @@ public class Click : MonoBehaviour
         }
     }
 
-    public void GameEnd() { 
-     
-        bool GameWin = true;
-       //SceneManager
+    private void GameWin() {
 
-    
+        gameWin = true;
+
+        if (BackgroundMusic != null)
+        {
+            BackgroundMusic.Stop();
+        }
+
+        //SceneManager
+        StartCoroutine(DelayedSceneTransition());
     }
 
+    private void GameLose()
+    {
+        gameLoss = true;
+        StartCoroutine(DelayedSceneTransition());
+        HealthManager.instance.LoseHealth();
+    }
 
+    IEnumerator DelayedSceneTransition()
+    {
+        yield return new WaitForSeconds(1f);
 
+        LoadRandomScene();
+    }
+
+    void LoadRandomScene()
+    {
+        //Gets the level's scene index
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        int randomSceneIndex;
+
+        do
+        {
+            randomSceneIndex = Random.Range(1, SceneManager.sceneCountInBuildSettings);
+        }
+        while (randomSceneIndex == currentSceneIndex || randomSceneIndex == 0 || randomSceneIndex == 3);
+
+        SceneManager.LoadScene(randomSceneIndex);
+    }
+
+    private void OnDestroy()
+    {
+        if (timer != null)
+        {
+            timer.OnTimerEnd -= GameLose;
+        }
+    }
 }
+

@@ -512,7 +512,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &407769987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -571,8 +571,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 860, y: 900}
+  m_AnchoredPosition: {x: -45.874325, y: 0}
+  m_SizeDelta: {x: 1206.6066, y: 900}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &519420028
 GameObject:
@@ -945,7 +945,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -34, y: 126}
+  m_AnchoredPosition: {x: -204, y: 138}
   m_SizeDelta: {x: 764.86, y: 604.301}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &755930093
@@ -969,7 +969,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: Custom sprites by Sam - Guy Holding a Champagne Glass, Champagne Bottle,
-    Bulgarian Dancers, Carnival Masks. (using Aseprite)
+    Bulgarian Dancers, Carnival Masks, Health Sprite. (using Aseprite)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -996,8 +996,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
-  m_fontSizeBase: 18
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1032,7 +1032,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 504.43713}
+  m_margin: {x: 0, y: 0, z: -268.4509, w: 504.43713}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1080,8 +1080,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -34, y: 13}
-  m_SizeDelta: {x: 764.86, y: 604.301}
+  m_AnchoredPosition: {x: -135.19, y: 21}
+  m_SizeDelta: {x: 902.483, y: 611.0973}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &875076371
 MonoBehaviour:
@@ -1130,8 +1130,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
-  m_fontSizeBase: 18
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1166,7 +1166,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 629.8713, w: 578.3797}
+  m_margin: {x: 0, y: 0, z: 602.6865, w: 513.8157}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1491,7 +1491,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -35, y: -18}
+  m_AnchoredPosition: {x: -204, y: -28}
   m_SizeDelta: {x: 764.86, y: 604.301}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1035960622
@@ -1532,7 +1532,13 @@ MonoBehaviour:
     cutlery with copy space. [online] Available at: https://www.freepik.com/free-photo/festive-glasses-cutlery-with-copy-space_5953400.htm#fromView=search&page=3&position=1&uuid=7b045984-e828-431b-b078-27783e142132&query=Elegant+Party+Background\n\nFreepik.
     (2023). Free Vector | Gradient background for carnival party. [online] Available
     at: https://www.freepik.com/free-vector/gradient-background-carnival-party_133713174.htm#fromView=search&page=1&position=2&uuid=1a9449b5-526c-4eb8-ba33-070d2ab05b8a&query=carnival+background
-    [Accessed 27 Feb. 2025]."
+    [Accessed 27 Feb. 2025].\n\nFreesound.org. (2025). Guitar loops [online] Available
+    at: https://freesound.org/people/josefpres/sounds/790363/ [Accessed 28 Feb. 2025].\r\n\r\n\u200CFreesound.org.
+    (2024). Freesound - Vitamin bottle cap pop open 1 by FOSSarts. [online] Available
+    at: https://freesound.org/people/FOSSarts/sounds/740111/ [Accessed 28 Feb. 2025].\r\n\r\n\u200CFreesound.org.
+    (2023). Freesound - AF Crowd Boo Hiss LOOP 2.wav by mglennsound. [online] Available
+    at: https://freesound.org/people/mglennsound/sounds/678537/ [Accessed 28 Feb.
+    2025].\r\n\r\n\u200C"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1595,7 +1601,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: -116.83096}
+  m_margin: {x: 0, y: 0, z: -402.6787, w: -82.849915}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1643,7 +1649,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 126, y: 310}
+  m_AnchoredPosition: {x: 122, y: 310}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1188498119
@@ -1666,9 +1672,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Epic celebration
+  m_text: 'Celebration
 
-    game'
+    Collection'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1701,8 +1707,8 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_fontStyle: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
