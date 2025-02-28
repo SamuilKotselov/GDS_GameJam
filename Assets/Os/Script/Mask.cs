@@ -1,38 +1,95 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
 
 public class Mask : MonoBehaviour
 {
-   private ChoosenMask choosenMask;
+    public AudioSource BackgroundMusic;
+    public AudioSource PlayMusic;
+    public AudioClip PlaySound;  
+    public AudioClip LoseSound;  
+
+    private ChoosenMask choosenMask;
+    private bool gameEnded = false;
 
     private void Start()
     {
         choosenMask = GetComponent<ChoosenMask>();
+
+        if (BackgroundMusic != null)
+        {
+            BackgroundMusic.loop = true;
+            BackgroundMusic.Play();
+        }
+
+        if (PlayMusic == null)
+        {
+            PlayMusic = gameObject.AddComponent<AudioSource>();
+        }
     }
+
     void Update()
     {
-        ClickMask();
-     
-
+        if (!gameEnded) 
+        {
+            CheckClick();
+        }
     }
 
-    public void ClickMask()
+    private void CheckClick()
     {
-        //it create a raycast from the mouse and when you click the copnent that that was choose it destroy it
-        if (choosenMask != null && choosenMask.MascaraW() !=null && Input.GetMouseButtonDown(0)) {
+        if (Input.GetMouseButtonDown(0)) 
+        {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity);
-            if (hit.collider != null)
-            {
-                Debug.Log("¡Has ganado!");
-                Destroy(choosenMask.MascaraW());
-                //scene Manager
-            }
 
+            if (hit.collider != null) 
+            {
+                if (choosenMask != null && hit.collider.gameObject == choosenMask.MascaraW())
+                {
+                    WinGame();
+                }
+                else
+                {
+                    LoseGame();
+                }
+            }
+            else
+            {
+                LoseGame(); 
+            }
+        }
+    }
+
+    private void WinGame()
+    {
+        gameEnded = true;
+        Debug.Log("You won!");
+
+        Destroy(choosenMask.MascaraW());
+
+        if (BackgroundMusic != null) BackgroundMusic.Stop();
+
+        if (PlayMusic != null && PlaySound != null)
+        {
+            PlayMusic.PlayOneShot(PlaySound);
         }
 
     }
- 
 
+    private void LoseGame()
+    {
+        gameEnded = true;
+        Debug.Log(" You lost");
+
+        if (BackgroundMusic != null) BackgroundMusic.Stop();
+
+        if (PlayMusic != null && LoseSound != null)
+        {
+            PlayMusic.PlayOneShot(LoseSound);
+        }
+        
+    }
+
+    
 }

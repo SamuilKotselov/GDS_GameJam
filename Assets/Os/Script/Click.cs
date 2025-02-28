@@ -11,9 +11,9 @@ using UnityEngine.SceneManagement;
 public class Click : MonoBehaviour
 {
    public int Score = 0;
-    public int ScoreMax = 20;
+   public int ScoreMax = 20;
    private int ScoreIncrease = 1;
-   
+   bool GameWin = false;
 
     [SerializeField] private TextMeshProUGUI Mark;
     [SerializeField] private Button button;
@@ -29,9 +29,16 @@ public class Click : MonoBehaviour
 
     private void Start()
     {
-        audiosource = GetComponent<AudioSource>();
-        BackgroundMusic.loop = true;
-        BackgroundMusic.Play();
+        if (BackgroundMusic != null)
+        {
+            BackgroundMusic.loop = true;
+            BackgroundMusic.Play();
+        }
+        if (audiosource == null)
+        {
+            audiosource = gameObject.AddComponent<AudioSource>();
+        }
+
     }
 
 
@@ -43,14 +50,17 @@ public class Click : MonoBehaviour
             Debug.Log("Number " + Score);
             if (Score == ScoreMax)
             {
-
+             
                 Debug.Log("End game");
                 ChangeSprite();
                 GameEnd();
-                BackgroundMusic.Stop();
+                if (BackgroundMusic != null)
+                {
+                    BackgroundMusic.Stop();
+                }
             }
         }
-        //add audio
+       
     }
     public void ChangeSprite()
     {
@@ -58,12 +68,22 @@ public class Click : MonoBehaviour
         {
             button.image.sprite = NewSprite;
         }
-        //add audio
+        if (audiosource != null )
+        {
+            if (WinSound != null)
+            {
+                audiosource.PlayOneShot(WinSound);
+            }
+            if (ChampOpen != null)
+            {
+                audiosource.PlayOneShot(ChampOpen);
+            }
+        }
     }
 
     public void GameEnd() { 
      
-            bool GameWin = true;
+        bool GameWin = true;
        //SceneManager
 
     
